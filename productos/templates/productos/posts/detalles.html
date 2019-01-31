@@ -1,0 +1,33 @@
+{% extends 'productos/base.html' %}
+{% block title %}Detalles{% endblock %}
+
+{% block content %}
+      <article class="media content-section">
+           
+            <div class="media-body">
+                
+                <div class="article-metadata">
+                        <h3 style="text-align:center;">{{ producto.nombre }}</h3>
+                </div>
+
+               <div class="row">
+                 <div class="col-md-6">
+                           <img {% if producto.imagen %} 
+                            src="{{ producto.imagen.url }}"
+                            {% else %} src="{% url 'productos/Noimage.jpg' %}"  
+                            {% endif %}  class="img-fluid" alt="Responsive image"
+                        style="margin-bottom : 10px; height :450px">
+                 
+                 </div>
+                 <div class="col-md-6">
+                         <p class="article-content">{{ producto.descripcion }}</p>
+                         <h4>Precio: MXN${{ producto.precio }}</h4>
+                 </div>
+               
+               </div>
+           
+            </div>
+
+
+        </article>
+ {% endblock %}       

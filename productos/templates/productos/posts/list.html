@@ -1,0 +1,58 @@
+{% extends 'productos/base.html' %}
+{% load static %}
+{% block title %} Lista {% endblock%}
+
+{% block content %}
+    <div class="col-md-4">
+        <div class="content-section">
+            <h3 style="text-align: center">CATEGORIAS</h3>      
+            <ul>        
+                <li {% if categoria %} class="list-group-item list-group-item-light"{% else %}class="list-group-item list-group-item-light selected"{% endif%}>
+                <a href="{% url 'store:productos_page'%}"></>
+                TODOS</li>
+                
+                {% for c in categorias %}
+                    <li {% if categoria.slug == c.slug  %} 
+                    class="list-group-item list-group-item-light selected" 
+                    {% else %} 
+                    class="list-group-item list-group-item-light" 
+                    {% endif %}>
+                    <a href="{{ c.get_absolute_url}}">{{ c.slug }}</a>
+                    </li>
+                {% endfor %}
+
+            
+            </ul>     
+        </div>
+    </div>
+   
+    <div class="col-md-8" style="margin-bottom : 25px">
+         
+       <div class="row">
+             {% for  producto in productos %}
+                   <a href="{{ producto.get_absolute_url }}" style="text-decoration :none;">
+                        <div class="col-md-4">
+                            <div class="card" style="width: 100% ; height : 400px">
+                            <img   {% if producto.imagen %} 
+                                        src="{{ producto.imagen.url }}"
+                                    {% else %} src="{% static 'productos/Noimage.jpg' %}"
+                                    {% endif %}  class="card-img-top" height="250px" width="250px">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ producto.nombre}}</h5>
+                                <p class="card-text">Precio:MXN${{ producto.precio}}</p>
+                            </div>
+                        </div>
+                    </a> 
+                  
+                                   
+              </div>
+             
+             {% endfor %}
+        
+
+       </div>
+
+
+    </div>
+ 
+{% endblock content %}
