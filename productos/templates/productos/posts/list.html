@@ -3,21 +3,25 @@
 {% block title %} Lista {% endblock%}
 
 {% block content %}
-    <div class="col-md-4">
+   <div class="row w-100 justify-content-center" style="margin-top : 60px ;margin-left: 0; margin-right:0">
+      <div class="col-md-6">
         <div class="content-section">
             <h3 style="text-align: center">CATEGORIAS</h3>      
-            <ul>        
-                <li {% if categoria %} class="list-group-item list-group-item-light"{% else %}class="list-group-item list-group-item-light selected"{% endif%}>
-                <a href="{% url 'store:productos_page'%}"></>
-                TODOS</li>
+            <ul style="text-align:center">        
+                <li  style="display : inline-block" {% if categoria %} class="list-group-item list-group-item-light"{% else %}class="list-group-item list-group-item-light selected"{% endif%}>
+                <a  style="text-decoration :none; font-family: 'Merienda', cursive;
+                font-size: 1rem;" 
+                href="{% url 'store:productos_page'%}">Todos</a>
+                </li>
                 
                 {% for c in categorias %}
-                    <li {% if categoria.slug == c.slug  %} 
+                    <li style="display : inline-block" {% if categoria.slug == c.slug  %} 
                     class="list-group-item list-group-item-light selected" 
                     {% else %} 
                     class="list-group-item list-group-item-light" 
                     {% endif %}>
-                    <a href="{{ c.get_absolute_url}}">{{ c.slug }}</a>
+                    <a style="text-decoration :none; font-family: 'Merienda', cursive;
+                    font-size: 1rem;" href="{{ c.get_absolute_url}}">{{ c.slug }}</a>
                     </li>
                 {% endfor %}
 
@@ -25,13 +29,17 @@
             </ul>     
         </div>
     </div>
+    
+
+   </div>
    
-    <div class="col-md-8" style="margin-bottom : 25px">
-         
-       <div class="row">
+   <div class="row w-100" style="margin-left: 0; margin-right:0">
+                  
+    
              {% for  item in items %}
-                   <a href="{{ item.get_absolute_url }}" style="text-decoration :none;">
-                        <div class="col-md-4">
+                   
+                        <div class="col-md-3" style="margin-bottom :20px;">
+                        <a href="{{ item.get_absolute_url }}" style="text-decoration :none;">
                             <div class="card" style="width: 100% ; height : 400px">
                             <img   {% if item.imagen %} 
                                         src="{{ item.imagen.url }}"
@@ -42,21 +50,23 @@
                                 <p class="card-text">Precio:MXN${{ item.precio}}</p>
                             </div>
                         </div>
-                    </a> 
-                  
-                                   
-              </div>
-             
+                        </a>
+                       </div> 
+                     
              {% endfor %}
-             <div style="margin-top : 20px">
-                  {% include 'pagination.html' with page=items %}
-             </div>               
-           
-        
+     
+   </div>
 
-       </div>
+<div class="w-100" style="margin-top : 20px; text-align:center">
+    {% include 'pagination.html' with page=items %}
+</div>
+
+  
 
 
-    </div>
+
+    
  
+
+
 {% endblock content %}

@@ -17,7 +17,7 @@ def productos_page(request,categoria_slug=None):
         categoria = get_object_or_404(categorias,slug=categoria_slug)
         productos = productos.filter(categoria=categoria)
     
-    paginator= Paginator(productos,6)
+    paginator= Paginator(productos,8)
     page= request.GET.get('page')
 
     try: 
