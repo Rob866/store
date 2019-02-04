@@ -4,3 +4,4 @@
   -los modelos y mostrar la informacion correspondiente a cada vista
   -en particular
 - Se creo la paginación
+  -se creso una interfaz de busqueda(con algunos detalles por concluir)

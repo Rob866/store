@@ -1,0 +1,75 @@
+{% extends 'productos/base.html' %}
+{% load static %}
+{% block content %}
+   <div class="contenedor w-100" style="margin-top: 80px">
+         {% if query %}
+        <h3>Elementos que coinciden con :  {{ query }}</h3>
+        <h3>
+            {% with results.count as total_results %}
+               Encontrados:  {{ total_results}} 
+            {% endwith %}
+        </h3>
+        
+   <div class="row w-100" style="margin-left: 0; margin-right:0">
+                  
+    
+             {% for  result in results %}
+                   
+                        <div class="col-md-3" style="margin-bottom :20px;">
+                        <a href="{{ result.get_absolute_url }}" style="text-decoration :none;">
+                            <div class="card" style="width: 100% ; height : 400px">
+                            <img   {% if result.imagen %} 
+                                        src="{{ result.imagen.url }}"
+                                    {% else %} src="{% static 'productos/Noimage.jpg' %}"
+                                    {% endif %}  class="card-img-top" height="250px" width="250px">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ result.nombre}}</h5>
+                                <p class="card-text">Precio:MXN${{ result.precio}}</p>
+                            </div>
+                        </div>
+                        </a>
+                       </div> 
+                 {% empty %}
+                 <p>No hay resultados de la busqueda.</p>        
+                     
+             {% endfor %}
+     
+   </div>
+
+   {% else %}
+    <form action="." method="GET" class="w-100">
+    
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group has-search">
+
+                                <span class="fa fa-search form-control-feedback"></span>
+                                {{ form.query }}
+                        
+                        
+                        </div>    
+                    </div>
+            </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-2">
+                        <div class="form-group ">
+                            <input  class="form-control" type="submit" value="Buscar">
+                        </div>    
+                    </div>
+            </div>
+
+        
+            
+            </div>
+   </form>
+
+   {% endif %}
+   
+   </div>
+  
+{% endblock content %}
+
+
+   

@@ -1,6 +1,8 @@
 from django.shortcuts import render,get_object_or_404
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.contrib.postgres.search import SearchVector
 from .models import Categoria,Producto
+from .forms import SearchForm
 
 # Create your views here.
 
@@ -39,3 +41,19 @@ def producto_detalles(request,id,producto_slug):
    
     context = { "producto": producto}
     return render(request,"productos/posts/detalles.html",context)
+
+
+def producto_busqueda(request):
+    form = SearchForm()
+    query = None
+    results=[]
+    if request.method == 'GET':
+        form= SearchForm(request.GET)
+        if form.is_valid():
+            query= form.cleaned_data['query']
+            results= Producto.objects.annotate(search=SearchVector('nombre','slug'),).filter(search=query)
+
+    context = {"form" : form,"query":query,"results": results}
+    return render(request,"productos/posts/busqueda.html",context)
+
+

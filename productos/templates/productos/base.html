@@ -26,13 +26,14 @@
             <div class="navbar-nav">
               <a class="nav-item nav-link" href="{% url 'store:about_page' %}">ABOUT</a>
               <a class="nav-item nav-link" href="{% url 'store:productos_page' %}">PRODUCTOS</a>
+              <a class="nav-item nav-link" href="{% url 'store:producto_busqueda' %}"><i  style="font-size : 25px" class="fas fa-search"></i></a>
             </div>
           </div>
         </div>
       </nav>
     </header>
     <main role="main" class="w-100">
-      <div class="row">
+      <div class="row" style="margin-right:0; margin-left:0">
           {% block content %}{% endblock %}
       </div>
     </main>  
